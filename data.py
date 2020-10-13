@@ -27,8 +27,7 @@ df_pretty = pd.DataFrame(df, columns = ["reviewText","overall"])
 # print(df_pretty)
 
  
-# for index, row in df.iterrows():
-#     print(row['reviewText'])
+
 
 # nlp = stanza.Pipeline(lang='en', processors='tokenize', 'mwt', 'pos')   #USE WHEN STANZA FINALLY IMPORTS
 
