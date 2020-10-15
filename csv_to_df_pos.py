@@ -24,6 +24,7 @@ df = pd.read_csv("Export1.csv", usecols=col_list)
 stanza.download('en')
 stanza_nlp = stanza.Pipeline('en')
 nlp = stanza.Pipeline(lang='en', processors='tokenize, mwt, pos')   
+##
 
 def pos_tag(review): 
     doc = nlp(review)  #function directly from stanza POS tag 
