@@ -3,7 +3,7 @@ import json
 from io import StringIO
 pd.set_option('display.max_rows',None)
 pd.set_option('display.max_colwidth', 5000)
-#import stanza 
+import stanza 
 
 #THE CHUNK BELOW IS ONLY IF YOU NEED TO MAKE A NEW CSV FILE IF YOU WANT TO CHANGE SIZE
 
