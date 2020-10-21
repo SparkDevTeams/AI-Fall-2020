@@ -2,7 +2,7 @@ import csv
 import pandas as pd
 import string
 
-review = pd.read_csv("C:/Users/mpink/OneDrive/Desktop/ai_sparkdev/AI-Fall-2020/export1.csv")
+review = pd.read_csv("C:/Users/mpink/OneDrive/Desktop/ai_fall2020/AI-Fall-2020/export1.csv")
 #print(review.head(48))
 
 exclude = set(string.punctuation)
