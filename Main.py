@@ -7,9 +7,6 @@ pd.set_option('display.max_rows',None)
 pd.set_option('display.max_colwidth', 5000)
 import stanza 
 
-# Creating dataframe
-col_list = ["reviewText"]
-df = pd.read_csv("Export1.csv", usecols=col_list)
 
 # Initialize spacy 'en' model, keeping only tagger component
 nlp = spacy.load('en_core_web_sm', disable=['parser', 'ner'])
@@ -41,13 +38,14 @@ def stopwords(IN_FILE_NAME:str, OUT_FILE_NAME:str):
             row['reviewText'] = stopwordRemover(row['reviewText'])
             csv_writer.writerow(row)
 
-# stopwords(IN_FILE_NAME, OUT_FILE_NAME)
+stopwords(IN_FILE_NAME, OUT_FILE_NAME)
 
+# Creating dataframe
+col_list = ["reviewText"]
+df = pd.read_csv("Stop.csv", usecols=col_list)
 
 ###################
 # Removing Punctuation
-review = pd.read_csv("File Path")
-
 exclude = set(string.punctuation)
 
 def testRemove(sentence):
