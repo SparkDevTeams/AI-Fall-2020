@@ -54,4 +54,9 @@ def testRemove(sentence):
          sentence = sentence.replace(ele, "")
    return sentence
 
-actualReview = review["reviewText"]
+#Punctuation remove
+testRemove(df.to_string(columns=col_list, index=False,header=False,max_rows=5))  
+
+#Remove Digits
+df['reviewText'] = df['reviewText'].str.replace(r'\d+', '')
+
