@@ -5,6 +5,7 @@ pd.set_option('display.max_rows',None)
 pd.set_option('display.max_colwidth', 5000)
 import stanza 
 
+
 #THE CHUNK BELOW IS ONLY IF YOU NEED TO MAKE A NEW CSV FILE IF YOU WANT TO CHANGE SIZE
 
     # with open('directory of OG json') as f:  #change to file directory for the json file
@@ -20,11 +21,15 @@ col_list = ["reviewText"]   #specify which columns you want to load into the dat
 df = pd.read_csv("Export1.csv", usecols=col_list) 
 
 # nlp = stanza.Pipeline(lang='en', processors='tokenize', 'mwt', 'pos')   #USE WHEN STANZA FINALLY IMPORTS
+#REMOVE NUMBERS 
+df['reviewText'] = df['reviewText'].str.replace(r'\d+', '')
+
 
 stanza.download('en')
 stanza_nlp = stanza.Pipeline('en')
 nlp = stanza.Pipeline(lang='en', processors='tokenize, mwt, pos')   
-##
+#
+
 
 def pos_tag(review): 
     doc = nlp(review)  #function directly from stanza POS tag 
@@ -33,4 +38,5 @@ def pos_tag(review):
 
 
 pos_tag(df.to_string(columns=col_list, index=False,header=False,max_rows=5))   #still need to figure out how to store the output from this function 
+
 
