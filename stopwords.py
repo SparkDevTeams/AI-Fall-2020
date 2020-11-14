@@ -1,4 +1,5 @@
 import spacy, csv, io
+import pandas as pd
 
 
 # Initialize spacy 'en' model, keeping only tagger component
@@ -9,28 +10,22 @@ all_stopwords = nlp.Defaults.stop_words
 
 
 # Input and output CSV files
-IN_FILE_NAME = "Export.csv"
+IN_FILE_NAME = "Export1.csv"
 OUT_FILE_NAME = "Stop.csv"
 
+col_list = ["reviewText", "overall"]
+df = pd.read_csv(IN_FILE_NAME, usecols=col_list)
 
-def stopwordRemover(sentence: str):
+
+def stopwordRemover(column):
     """Takes a string as an input and outputs the string without stopwords"""
-    # Parse the sentence using the loaded 'en' model object `nlp`
-    doc = nlp(sentence)
 
     # Join words that aren't stopwords
-    end = " ".join([token.text for token in doc if not token.lower_ in all_stopwords])
-    return end
-  
+    new_words = []
+    for row in column:
+        new_words.append(" ".join([word for word in (str(row).split()) if word.lower() not in all_stopwords]))
+    return new_words
+   
 
-def stopwords(IN_FILE_NAME:str, OUT_FILE_NAME:str):
-    """Takes input and output files to modify the reviewText column"""
-    with open(IN_FILE_NAME, newline='') as csvfile, open(OUT_FILE_NAME, 'w', newline='') as out_csv:
-        reader = csv.DictReader(csvfile)
-        csv_writer = csv.DictWriter(out_csv, fieldnames=reader.fieldnames)
-        csv_writer.writeheader()
-        for row in reader:
-            row['reviewText'] = stopwordRemover(row['reviewText'])
-            csv_writer.writerow(row)
-
-# stopwords(IN_FILE_NAME, OUT_FILE_NAME)
+df["reviewText"] = stopwordRemover(df["reviewText"].values)
+print(df.head(10))
