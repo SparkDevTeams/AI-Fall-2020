@@ -1,7 +1,7 @@
 import pandas as pd
-import re
-from os import system, listdir
-from os.path import isfile, join
+#import re
+from os import system
+# from os.path import isfile, join
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 from joblib import dump, load # used for saving and loading sklearn objects
 from scipy.sparse import save_npz, load_npz # used for saving and loading sparse matrices
@@ -9,6 +9,9 @@ import numpy as np
 
 system("mkdir 'data_preprocessors'")
 system("mkdir 'vectorized_data'")
+
+col_list = ["reviewText"]
+df_og = pd.read_csv("Cleaned_million.csv", usecols=col_list)
 
 def vectorization(pdCol: np.array):
     """Bigram vectorizer that has a pdDataFram["columnName"].values as input"""
@@ -38,3 +41,5 @@ def vectorization(pdCol: np.array):
     # X_train_bigram_tf_idf = load_npz('vectorized_data/X_train_bigram_tf_idf.npz')
 
     return(X_train_bigram_tf_idf)
+
+print(vectorization(df_og["reviewText"].values.astype('U')))
