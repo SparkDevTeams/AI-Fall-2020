@@ -5,17 +5,17 @@ pd.set_option('display.max_rows',None)
 pd.set_option('display.max_colwidth', 5000)
 import stanza 
 
-
 #THE CHUNK BELOW IS ONLY IF YOU NEED TO MAKE A NEW CSV FILE IF YOU WANT TO CHANGE SIZE
+#THIS WILL MAKE CSV FILE with 1million reviews 
 
-    # with open('directory of OG json') as f:  #change to file directory for the json file
-    #     chunks = pd.read_json(f, lines=True, chunksize=100000)
-    #     x=0
-    #     # while x<10:    
-    #     for c in chunks:
-    #         data = c.to_csv('Export1.csv',index = False)
-    #         break
-    #             #x+=1 
+# with open('add directory of your json file') as f:  #change to file directory for the json file
+#     chunks = pd.read_json(f, lines=True, chunksize=1000000)
+#     x=0
+#     # while x<10:    
+#     for c in chunks:
+#         data = c.to_csv('Export1.csv',index = False)
+#         break
+#             #x+=1 
 
 col_list = ["reviewText"]   #specify which columns you want to load into the dataframe from csv
 df = pd.read_csv("Export1.csv", usecols=col_list) 
@@ -23,6 +23,7 @@ df = pd.read_csv("Export1.csv", usecols=col_list)
 # nlp = stanza.Pipeline(lang='en', processors='tokenize', 'mwt', 'pos')   #USE WHEN STANZA FINALLY IMPORTS
 #REMOVE NUMBERS 
 df['reviewText'] = df['reviewText'].str.replace(r'\d+', '')
+print(df['reviewText'].head(48))
 
 
 stanza.download('en')
